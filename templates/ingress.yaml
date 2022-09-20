@@ -25,7 +25,7 @@ spec:
   {{- if $new }}
   ingressClassName: {{ required "If ingress.enabled is set to true, ingress.class is required" .Values.ingress.class | quote }}
   {{- end }}
-  {{- if .Values.ingress.tls.enabled }}
+  {{- if .Values.ingress.tls }}
   tls:
     - hosts:
       {{- range .Values.ingress.hosts }}
