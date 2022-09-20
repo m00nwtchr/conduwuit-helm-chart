@@ -16,7 +16,7 @@ Deploy chart:
     - apk add -U git
     - helm plugin install https://github.com/chartmuseum/helm-push.git
   script:
-    - helm push . https://charts.cronce.io
+    - helm cm-push . https://charts.cronce.io
   only:
     - tags
 
