@@ -1,0 +1,16 @@
+apiVersion: v1
+appVersion: 0.0.1.147f2752
+description: A Matrix homeserver written in Rust
+name: conduit
+version: 0.1.0
+keywords:
+  - conduit
+  - matrix
+  - homeserver
+home: https://gitlab.com/famedly/conduit
+sources:
+  - https://gitlab.com/famedly/conduit
+  - https://gitlab.cronce.io/charts/conduit
+maintainers:
+  - name: mcronce
+    email: mike@cronce.io

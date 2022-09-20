@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name:  {{ template "conduit.fullname" . }}
+  labels:
+    {{- include "conduit.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  serviceName: {{ template "conduit.fullname" . }}
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      {{- include "conduit.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "conduit.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: conduit
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - mountPath: /data
+              name: data
+              subPath: data
+          env:
+            - name: CONDUIT_SERVER_NAME
+              value: {{ .Values.config.server_name | quote }}
+            - name: CONDUIT_DATABASE_PATH
+              value: "/data"
+            - name: CONDUIT_DATABASE_BACKEND
+              value: "rocksdb"
+            - name: CONDUIT_PORT
+              value: "8080"
+            - name: CONDUIT_MAX_REQUEST_SIZE
+              value: {{ .Values.config.max_request_size | quote }}
+            {{- if .Values.config.allow_registration }}
+            - name: CONDUIT_ALLOW_REGISTRATION
+              value: "true"
+            {{- end }}
+            {{- if .Values.config.allow_federation }}
+            - name: CONDUIT_ALLOW_FEDERATION
+              value: "true"
+            {{- end }}
+            - name: CONDUIT_TRUSTED_SERVERS
+              value: {{ mustToJson .Values.config.trusted_servers | quote }}
+            - name: CONDUIT_ADDRESS
+              value: "0.0.0.0"
+            - name: RUST_LOG
+              value: info
+          readinessProbe:
+            httpGet:
+              path: /_matrix/federation/v1/version
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 2
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /_matrix/federation/v1/version
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 2
+            failureThreshold: 5
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      affinity:
+        {{- toYaml .Values.affinity | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
+      volumes:
+        - name: data
+          {{- if .Values.persistence.data.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.data.existingClaim | default (printf "%s-%s" (include "conduit.fullname" .) "data") }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+

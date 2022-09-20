@@ -1,0 +1,67 @@
+image:
+  repository: matrixconduit/matrix-conduit
+  tag: next-commit-147f2752
+  pullPolicy: IfNotPresent
+
+config:
+  server_name: "your.server.name"
+  max_request_size: "20_000_000"
+  allow_registration: false
+  allow_federation: false
+  trusted_servers: []
+
+## Add additional labels to all resources
+extraLabels: {}
+
+service:
+  annotations: {}
+  type: ClusterIP
+  clusterIP: ""
+
+  port: 80
+  ## List of IP addresses at which the service is available
+  ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
+  ##
+  externalIPs: []
+
+  loadBalancerIP: ""
+  loadBalancerSourceRanges: []
+
+ingress:
+  enabled: false
+  class:
+  annotations: {}
+  path: /
+  hosts:
+    - conduit
+  tls: false
+
+## Persist configuration to a persistent volume
+persistence:
+  ## Data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If unset, storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  data:
+    enabled: true
+    existingClaim:
+    storageClass:
+    accessMode: ReadWriteOnce
+    size: 16Gi
+
+resources:
+  requests:
+    cpu: "1"
+    memory: "256Mi"
+  limits:
+    cpu: "2"
+    memory: "512Mi"
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
