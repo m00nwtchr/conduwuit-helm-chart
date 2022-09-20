@@ -5,7 +5,7 @@ image:
 
 config:
   server_name: "your.server.name"
-  max_request_size: "20_000_000"
+  max_request_size: "20000000"
   allow_registration: false
   allow_federation: false
   trusted_servers: []
@@ -16,7 +16,7 @@ extraLabels: {}
 service:
   annotations: {}
   type: ClusterIP
-  clusterIP: ""
+  clusterIP: "None"
 
   port: 80
   ## List of IP addresses at which the service is available
