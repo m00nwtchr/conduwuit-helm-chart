@@ -64,16 +64,20 @@ spec:
             httpGet:
               path: /_matrix/federation/v1/version
               port: http
-            initialDelaySeconds: 1
             periodSeconds: 2
             failureThreshold: 5
           livenessProbe:
             httpGet:
               path: /_matrix/federation/v1/version
               port: http
-            initialDelaySeconds: 1
             periodSeconds: 2
             failureThreshold: 5
+          startupProbe:
+            httpGet:
+              path: /_matrix/federation/v1/version
+              port: http
+            failureThreshold: 120
+            periodSeconds: 2
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       nodeSelector:
