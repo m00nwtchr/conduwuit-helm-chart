@@ -1,6 +1,6 @@
 image:
   repository: matrixconduit/matrix-conduit
-  tag: next-commit-147f2752
+  tag: v0.5.0
   pullPolicy: IfNotPresent
 
 config:
