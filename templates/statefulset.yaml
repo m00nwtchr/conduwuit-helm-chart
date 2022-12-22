@@ -76,7 +76,7 @@ spec:
             httpGet:
               path: /_matrix/federation/v1/version
               port: http
-            failureThreshold: 120
+            failureThreshold: 240
             periodSeconds: 2
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
