@@ -2,7 +2,7 @@ apiVersion: v1
 appVersion: 0.7.0
 description: A Matrix homeserver written in Rust
 name: conduit
-version: 0.1.6
+version: 0.1.7
 keywords:
   - conduit
   - matrix
