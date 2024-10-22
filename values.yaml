@@ -1,6 +1,6 @@
 image:
-  repository: matrixconduit/matrix-conduit
-  tag: v0.7.0
+  repository: girlbossceo/conduwuit
+  tag: "v0.4.3-d875e0c1c00d8e42b83dd562c3945c077898746d"
   pullPolicy: IfNotPresent
 
 config:
@@ -9,6 +9,8 @@ config:
   allow_registration: false
   allow_federation: false
   trusted_servers: []
+
+extraEnv: []
 
 ## Add additional labels to all resources
 extraLabels: {}
@@ -36,7 +38,7 @@ ingress:
   annotations: {}
   path: /
   hosts:
-    - conduit
+    - conduwuit
   tls: false
 
 ## Persist configuration to a persistent volume
