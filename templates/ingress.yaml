@@ -30,6 +30,6 @@ spec:
               service:
                 name: {{ $fullName }}
                 port:
-                  number: {{ .Values.service.port }}
+                  number: 80
 {{- end }}
 
