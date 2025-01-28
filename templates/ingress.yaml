@@ -31,5 +31,15 @@ spec:
                 name: {{ $fullName }}
                 port:
                   name: http
+    - host: {{ .Values.config.server_name }}
+      http:
+        paths:
+          - path: /.well-known/matrix/
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: http
 {{- end }}
 
