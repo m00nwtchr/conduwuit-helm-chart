@@ -30,8 +30,8 @@ data:
     {{ .Values.extraConfig }}
 
     [global.well_known]
-    client = "https://{{ tpl (.Values.ingress.hostname) $ | default printf "matrix.%s" .Values.config.server_name }}"
-    server = "{{ tpl (.Values.ingress.hostname) $ | default printf "matrix.%s" .Values.config.server_name }}:443"
+    client = "https://{{ tpl (.Values.ingress.hostname) $ | default (printf "matrix.%s" .Values.config.server_name) }}"
+    server = "{{ tpl (.Values.ingress.hostname) $ | default (printf "matrix.%s" .Values.config.server_name) }}:443"
 
     #support_page =
     #support_role =

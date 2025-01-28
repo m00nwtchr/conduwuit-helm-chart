@@ -35,12 +35,12 @@ spec:
             - mountPath: /var/lib/conduwuit
               name: data
               subPath: data
-            {{- if .Values.config.allow_registration -}}
+            {{- if .Values.config.allow_registration }}
             - name: registration-secret
               mountPath: /etc/conduwuit/reg_token
               subPath: token
               readOnly: true
-            {{- end -}}
+            {{- end }}
           securityContext:
             capabilities:
               add:
@@ -75,8 +75,8 @@ spec:
           {{- else }}
           emptyDir: {}
           {{- end }}
-        {{- if .Values.config.allow_registration -}}
+        {{- if .Values.config.allow_registration }}
         - name: registration-secret
           secret:
             secretName: conduit-registration-secret
-        {{- end -}}
+        {{- end }}
