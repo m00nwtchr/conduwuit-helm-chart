@@ -34,7 +34,7 @@ service:
 
 ingress:
   enabled: false
-  class:
+  class: ""
   # You will probably want to provide either large upload size limits, or no
   #    upload size limit; for example, if using nginx-ingress, include
   #    nginx.ingress.kubernetes.io/proxy-body-size: "0"
