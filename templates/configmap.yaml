@@ -20,9 +20,9 @@ data:
     max_request_size = {{ .Values.config.max_request_size }}
 
     allow_registration = {{ .Values.config.allow_registration }}
-    {{- if .Values.config.allow_registration -}}
+    {{- if .Values.config.allow_registration }}
     registration_token_file = "/etc/conduwuit/reg_token"
-    {{- end -}}
+    {{- end }}
 
     allow_federation = {{ .Values.config.allow_federation }}
 
@@ -30,8 +30,8 @@ data:
     {{ .Values.extraConfig }}
 
     [global.well_known]
-    client = "https://matrix.{{ .Values.config.server_name }}"
-    server = "matrix.{{ .Values.config.server_name }}:443"
+    client = "https://{{ tpl (.Values.ingress.hostname) $ | default printf "matrix.%s" .Values.config.server_name }}"
+    server = "{{ tpl (.Values.ingress.hostname) $ | default printf "matrix.%s" .Values.config.server_name }}:443"
 
     #support_page =
     #support_role =
