@@ -5,10 +5,13 @@ image:
 
 config:
   server_name: "your.server.name"
-  max_request_size: "20000000"
-  allow_registration: false
-  allow_federation: false
+  new_user_displayname_suffix: ""
+  max_request_size: "20971520"
+  allow_registration: true
+  allow_federation: true
   trusted_servers: []
+
+extraConfig: ""
 
 extraEnv: []
 
@@ -59,10 +62,9 @@ persistence:
 
 resources:
   requests:
-    cpu: "1"
+    cpu: "2"
     memory: "256Mi"
   limits:
-    cpu: "2"
     memory: "512Mi"
 
 nodeSelector: {}

@@ -51,3 +51,11 @@ helm.sh/chart: {{ template "conduwuit.chart" . }}
 {{- end -}}
 {{- end -}}
 
+{{- define "gen-secret" -}}
+{{- $secret := lookup "v1" "Secret" .Release.Namespace "conduit-registration-secret" -}}
+{{- if $secret -}}
+token: {{ $secret.data.token }}
+{{- else -}}
+token: {{ randAlphaNum 72 | b64enc }}
+{{- end -}}
+{{- end -}}
