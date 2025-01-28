@@ -9,7 +9,7 @@ data:
     [global]
     server_name = "{{ .Values.config.server_name }}"
     address = ["::"]
-    #port = 8008
+    port = {{ .Values.service.port }}
     database_path = "/var/lib/conduwuit"
 
     #database_backup_path = "/opt/conduwuit-db-backups"
