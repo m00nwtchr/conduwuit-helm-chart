@@ -26,7 +26,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8008
           volumeMounts:
             - name: config
               mountPath: /etc/conduwuit/conduwuit.toml
@@ -46,6 +46,8 @@ spec:
               add:
                 - NET_BIND_SERVICE
           env:
+            - name: CONDUWUIT_CONFIG
+              value: /etc/conduwuit/conduwuit.toml
             {{- range .Values.extraEnv }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
