@@ -40,8 +40,7 @@ ingress:
   #    nginx.ingress.kubernetes.io/proxy-body-size: "0"
   annotations: {}
   path: /
-  hosts:
-    - conduwuit
+  hostname: ""
   tls: false
 
 ## Persist configuration to a persistent volume
