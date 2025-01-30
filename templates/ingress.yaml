@@ -28,7 +28,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ $fullName }}
+                name: {{ .Release.Name }}
                 port:
                   name: http
     - host: {{ .Values.config.server_name }}
@@ -38,7 +38,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ $fullName }}
+                name: {{ .Release.Name }}
                 port:
                   name: http
 {{- end }}
