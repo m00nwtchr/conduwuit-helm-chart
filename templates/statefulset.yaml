@@ -48,6 +48,8 @@ spec:
           env:
             - name: CONDUWUIT_CONFIG
               value: /etc/conduwuit/conduwuit.toml
+            - name: CONDUWUIT_PORT
+              value: 8008
             {{- range .Values.extraEnv }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
